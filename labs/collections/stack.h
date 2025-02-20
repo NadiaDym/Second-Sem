@@ -1,4 +1,4 @@
-фывфывфыв#pragma once
+#pragma once
 
 #include <stdexcept>
 
