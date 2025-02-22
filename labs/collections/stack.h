@@ -17,10 +17,12 @@ private:
         Container* next;
     };
 
-    Container* top = nullptr;
-    int counter = 0;
+    Container* top;
+    int counter;
 
 public:
+    Stack() : top(nullptr), counter(0) {}
+
     /// <summary>
     /// Особый метод класса, который срабатывает во время уничтожения объектов класса.
     /// Его роль заключается в том, чтобы освободить динамическую память
