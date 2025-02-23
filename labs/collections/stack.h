@@ -69,7 +69,7 @@ public:
     /// </summary>
     /// <returns>Значение верхнего элемента стека.</returns>
     /// <exception cref="runtime_error">Выбрасывается ошибка, если стек пуст.</exception>
-    T peek()
+    T peek() const
     {
         if (top == nullptr)
         {
