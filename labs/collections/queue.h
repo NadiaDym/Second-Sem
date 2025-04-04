@@ -4,8 +4,8 @@
 using namespace std;
 
 /// <summary>
-/// РљР»Р°СЃСЃ Queue СЂРµР°Р»РёР·СѓРµС‚ РѕС‡РµСЂРµРґСЊ СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј СЃРІСЏР·РЅРѕРіРѕ СЃРїРёСЃРєР°.
-/// РљРѕР»Р»РµРєС†РёСЏ РѕР±РµСЃРїРµС‡РёРІР°РµС‚ РґРѕСЃС‚СѓРї Рє РґР°РЅРЅС‹Рј РїРѕ РїСЂРёРЅС†РёРїСѓ "РїРµСЂРІС‹Р№ РїСЂРёС€РµР» вЂ” РїРµСЂРІС‹Р№ РІС‹С€РµР»" (FIFO).
+/// Класс Queue реализует очередь с использованием связного списка.
+/// Коллекция обеспечивает доступ к данным по принципу "первый пришел — первый вышел" (FIFO).
 /// </summary>
 template <typename T>
 class Queue
@@ -24,12 +24,12 @@ private:
 
 public:
 	/// <summary>
-	/// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ, РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚ РїСѓСЃС‚СѓСЋ РѕС‡РµСЂРµРґСЊ.
+	/// Конструктор по умолчанию, инициализирует пустую очередь.
 	/// </summary>
 	Queue() : top(nullptr), bottom(nullptr), amount(0) {}
 
 	/// <summary>
-	/// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ, РѕСЃРІРѕР±РѕР¶РґР°РµС‚ РїР°РјСЏС‚СЊ, Р·Р°РЅСЏС‚СѓСЋ РѕС‡РµСЂРµРґСЊСЋ.
+	/// Деструктор, освобождает память, занятую очередью.
 	/// </summary>
 	~Queue()
 	{
@@ -37,16 +37,15 @@ public:
 	}
 
 	/// <summary>
-	/// Р”РѕР±Р°РІР»СЏРµС‚ СЌР»РµРјРµРЅС‚ РІ РєРѕРЅРµС† РѕС‡РµСЂРµРґРё.
+	/// Добавляет элемент в конец очереди.
 	/// </summary>
 	void queue(T value)
 	{
-		Container* temp = new Container();
+		Container<T>* temp = new Container<T>;
 		temp->data = value;
-
+		temp->next = nullptr;
 		if (bottom == nullptr)
 		{
-			temp->next = bottom;
 			bottom = temp;
 			top = temp;
 		}
@@ -59,20 +58,16 @@ public:
 	}
 
 	/// <summary>
-	/// РЈРґР°Р»СЏРµС‚ СЌР»РµРјРµРЅС‚ РёР· РЅР°С‡Р°Р»Р° РѕС‡РµСЂРµРґРё Рё РІРѕР·РІСЂР°С‰Р°РµС‚ РµРіРѕ Р·РЅР°С‡РµРЅРёРµ.
+	/// Удаляет элемент из начала очереди и возвращает его значение.
 	/// </summary>
-	/// <returns>Р—РЅР°С‡РµРЅРёРµ, СѓРґР°Р»РµРЅРЅРѕРµ РёР· РѕС‡РµСЂРµРґРё.</returns>
+	/// <returns>Значение, удаленное из очереди.</returns>
 	T unqueue()
 	{
-		if (top == nullptr)
-		{
-			throw "Queue is empty";
-		}
 		if (bottom == nullptr)
 		{
 			throw "Queue is empty";
 		}
-		Container* temp = bottom->next;
+		Container<T>* temp = bottom->next;
 		T value = bottom->data;
 		delete bottom;
 		bottom = temp;
@@ -81,27 +76,26 @@ public:
 	}
 
 	/// <summary>
-	/// Р’РѕР·РІСЂР°С‰Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РѕС‡РµСЂРµРґРё.
+	/// Возвращает количество элементов в очереди.
 	/// </summary>
-	/// <returns>РљРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ РѕС‡РµСЂРµРґРё.</returns>
+	/// <returns>Количество элементов в очереди.</returns>
 	int count()
 	{
 		return amount;
 	}
 
 	/// <summary>
-	/// РћС‡РёС‰Р°РµС‚ РѕС‡РµСЂРµРґСЊ, СѓРґР°Р»СЏСЏ РІСЃРµ СЌР»РµРјРµРЅС‚С‹.
+	/// Очищает очередь, удаляя все элементы.
 	/// </summary>
 	void clear()
 	{
-		while (top != nullptr)
+		while (bottom != nullptr)
 		{
-			Container* temp = top->next;
-			delete top;
-			top = temp;
+			Container<T>* temp = bottom;
+			bottom = bottom->next;
+			delete temp;
 		}
 		top = nullptr;
-		bottom = nullptr;
 		amount = 0;
 	}
 };
