@@ -79,6 +79,7 @@ int main()
 {
 	setlocale(LC_ALL, "RU");
 	Queue<int> queue;
+	displayMenu();
 	while (true)
 	{
 		int command;
@@ -98,7 +99,7 @@ int main()
 			break;
 
 		case 2:
-			cout << "Вы извлекаете одно число из очереди: " << queue.unqueue() << endl;
+			cout << "Из очереди было извлечено значение: " << queue.unqueue() << endl;
 			break;
 
 		case 3:
@@ -110,11 +111,13 @@ int main()
 			break;
 
 		case 5:
+		{
 			int testNum;
 			cout << "Введите число для проверки: ";
 			cin >> testNum;
-			int counter = countOccurrences(queue, testNum);
-			displayOccurrences(testNum, counter);
+			int amount = countOccurrences(queue, testNum);
+			displayOccurrences(testNum, amount);
+		}
 			break;
 
 		case 6:
@@ -127,7 +130,7 @@ int main()
 
 		case 8:
 			cout << "Вы завершили работу программы!\n";
-			break;
+			return 0;
 
 		default:
 			cout << "Некорректный ввод, попробуйте снова.\n";
