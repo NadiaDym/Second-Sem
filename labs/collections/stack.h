@@ -1,5 +1,4 @@
 #pragma once
-#include <container.h>
 #include <stdexcept>
 
 using namespace std;
@@ -11,7 +10,13 @@ template <typename T>
 class Stack
 {
 private:
-    Container<T>* top;
+    struct Container
+    {
+        T data;
+        Container* next;
+    };
+
+    Container* top;
     int counter;
 
 public:
@@ -32,7 +37,7 @@ public:
     /// <param name="value">Значение, которое нужно добавить в стек.</param>
     void push(T value)
     {
-        Container<T>* temp = new Container<T>;
+        Container* temp = new Container();
         temp->data = value;
         temp->next = top;
         top = temp;
@@ -50,7 +55,7 @@ public:
         {
             throw ("Stack is empty!");
         }
-        Container<T>* temp = top->next;
+        Container* temp = top->next;
         T value = top->data;
         delete top;
         top = temp;
@@ -88,7 +93,7 @@ public:
     {
         while (top != nullptr)
         {
-            Container<T>* temp = top->next;
+            Container* temp = top->next;
             delete top;
             top = temp;
         }
