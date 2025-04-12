@@ -1,4 +1,4 @@
-фывфывыфвфы#pragma once
+#pragma once
 #include <container.h>
 #include <stdexcept>
 
@@ -15,7 +15,6 @@ private:
 	Container<T>* top;
 	Container<T>* bottom;
 	int amount;
-
 public:
 	/// <summary>
 	/// Конструктор по умолчанию, инициализирует пустую очередь.

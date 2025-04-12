@@ -144,7 +144,6 @@
   <ItemGroup>
     <ClInclude Include="container.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="header.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
     <ClInclude Include="pch.h" />

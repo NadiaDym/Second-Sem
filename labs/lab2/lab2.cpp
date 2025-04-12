@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void OneBeforeNegative(Queue<int>& queue)
+void InsertOneBeforeNegative(Queue<int>& queue)
 {
 	for (int i = 0; i < queue.count(); i++)
 	{
@@ -103,7 +103,7 @@ int main()
 			break;
 
 		case 3:
-			OneBeforeNegative(queue);
+			InsertOneBeforeNegative(queue);
 			break;
 
 		case 4:
